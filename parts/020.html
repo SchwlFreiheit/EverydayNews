@@ -1,0 +1,62 @@
+<script>
+(()=>{
+const brand=document.querySelector('.brand span');if(brand)brand.textContent='DISCOVERY / HOURLY';
+const issue=document.querySelector('.issuebar');if(issue){const spans=issue.querySelectorAll('span');if(spans[0])spans[0].textContent='16 SEP 2026 · LATEST SWEEP';if(spans[1])spans[1].textContent=`本記事 ${document.querySelectorAll('.feed .story').length}件 · 記事化待ち ${document.querySelectorAll('.cand-list .candidate').length}件`;}
+const candSec=document.querySelector('.candidates');if(candSec&&!candSec.querySelector('.candidate'))candSec.style.display='none';
+const storyText={
+'agent-qa':['AIエージェントの変更を取り込み前に回帰試験し、実行後も監査する','Amazonのクラウド基盤は、エージェント変更を自動評価して品質低下ならコード取り込みを停止します。実行履歴監査ツールは、再現不能・重複・権限超過を後から検査します。'],
+'browser-continuity':['ログイン済みブラウザをAIへ渡す「分離型」と「直結型」','専用ブラウザを永続化するHronautと、普段のChromeへ直接つなぐBrowser MCPを比較しました。便利さより、認証情報と権限の境界が大きく違います。'],
+'reach-ecc':['積層型高速メモリの誤り訂正を「普段」と「非常時」に分けるREACH','AI向けの積層型高速メモリ（HBM）で、通常の小さな誤りは軽く処理し、解決不能な部分だけ強い長区間訂正へ回す設計です。実チップ検証はまだありません。'],
+'flare-photonic':['7,378個の光ニューロンで「記憶しながら計算する」FLARE','光記憶計算方式FLAREは、長期記憶と毎秒10億周期級の短期応答を同じチップへ統合しました。10コア系でドローン向け探索・適応課題を実証しています。'],
+'wave-neuro-robot':['水面波そのものに障害物を判定させ、実ロボット車を動かす','水面波の干渉を計算媒体として使い、小型制御基板Arduinoの車をリアルタイム回避走行させた査読済み研究です。固体スピン波チップ版はまだシミュレーションです。'],
+'clinical-stability':['同じ症例をAIへ複数回解かせ、回答の安定性を信頼度にする','臨床AIを同一症例で繰り返し実行した研究では、診断の一致度が正誤を分ける強い指標になりました。安定度0.90以上の約半数だけを自動処理すると診断精度98.9%でした。'],
+'intent-gate':['AIの道具操作を「元の依頼」と照合してから実行する','Googleは、データベース命令や外部機能呼び出しが形式上正しくても、ユーザーの目的や業務規則に意味として合うかを実行直前に確認する設計を公開しました。'],
+'llada-image':['生成と編集を1モデルにまとめた60億規模の画像AI「LLaDA-Image」','inclusionAIが画像生成と参照画像編集を一つのモデルへ統合しました。50ステップの標準版と4ステップ推奨の高速版を公開していますが、学習コードはまだ未公開です。'],
+'quantum-freefall':['量子波を「静止」と「自由落下」に分け、重力で生じる位相差を測定','冷却ルビジウム原子の波を二経路に分け、一方を静止、もう一方を自由落下させて再結合しました。等価原理が量子波へ与える予測と低エネルギー領域で一致しています。'],
+'acorn-reprogramming':['変態で細胞が消えるだけでなく、別の役割へ再設定される証拠','ギボシムシ87,021細胞を5発生段階で追跡しました。多くの幼生細胞は変態後も残りながら遺伝子活動を大きく切り替え、大規模な細胞再プログラムを支持しました。'],
+'personality-genetics':['100万人規模で性格と遺伝子の関係を調べると、効果は多数の小さな変異へ分散した','46研究集団・最大114万人の性格5因子解析で1,260の関連変異を特定しました。一般的な遺伝変異が説明する性格差は約4.8〜9.3%で、環境の寄与も大きく残ります。'],
+'sleep-cortex':['大脳皮質に、遠くの領域を同期させて睡眠を促す少数ニューロン','マウスでSst-Chodl抑制性ニューロンが長距離へ投射し、活性化すると皮質同期と徐波睡眠が増えました。睡眠制御へ大脳皮質自身が能動的に関わる証拠です。'],
+'codex-quota-watch':['Codex利用枠が「別の古い週次状態」へ切り替わる報告が複数で一致','OpenAIのコーディングAI「Codex」で、週次残量とリセット日時が同時に別状態へ変わり元へ戻る報告が集中しています。サーバー側不整合の兆候ですが、新しい全体リセットの予告ではありません。']};
+for(const [id,[title,summary]] of Object.entries(storyText)){const s=document.querySelector(`[data-open="${id}"]`);if(!s)continue;const h=s.querySelector('h2'),p=s.querySelector('p');if(h)h.textContent=title;if(p)p.textContent=summary;}
+const G={
+'Amazon Web Services':['Amazonのクラウド事業者「Amazon Web Services」','Amazonが提供する世界的なクラウド計算サービス。','Amazon Web Services'],
+'AWS':['Amazonのクラウド基盤（AWS）','Amazon Web Servicesの略称。','AWS'],
+'ToolReplay':['実行履歴監査ツール「ToolReplay」','AIエージェントの道具呼び出し履歴を、再現性・重複・権限の観点から検査するPythonツール。','ToolReplay'],
+'Hronaut':['永続ブラウザ基盤「Hronaut」','AI専用ブラウザのログイン・Cookie・タブ・作業領域をセッション越しに保持するローカル基盤。','Hronaut'],
+'Browser MCP':['実ブラウザ接続ツール「Browser MCP」','普段のログイン済みChromeをAIからMCP経由で操作するオープンソース接続ツール。','Browser MCP'],
+'Chromium':['オープンソースブラウザ基盤「Chromium」','Chromeなどの基礎になっているオープンソースのブラウザ実装。','Chromium'],
+'Chrome':['Google製ブラウザ「Chrome」','Googleが提供するWebブラウザ。','Google Chrome'],
+'MCP':['AI道具接続規格（MCP）','AIから外部の道具やデータ源を共通形式で呼ぶための接続規格。','Model Context Protocol'],
+'HBM':['積層型高速メモリ（HBM）','複数のメモリ層を積み重ね、高い転送帯域を得るAI向けメモリ。','High-Bandwidth Memory'],
+'ECC':['誤り訂正符号（ECC）','メモリのビット化けを検出・訂正するために追加情報を持つ仕組み。','Error-Correcting Code'],
+'REACH':['メモリ保護方式「REACH」','積層型高速メモリで通常の訂正と長区間の例外修復を分ける研究提案。','REACH'],
+'FLARE':['光記憶計算方式「FLARE」','光ニューロンの中へ短期・長期記憶を組み込み、センシング・計算・記憶を統合する方式。','FLARE'],
+'GHz':['毎秒10億周期（GHz）','1秒あたり10億回の周期を表す周波数単位。','gigahertz'],
+'Arduino':['小型制御基板「Arduino」','センサーやモーター制御に広く使われる小型マイコン基板・開発環境。','Arduino'],
+'Nature Medicine':['医学誌「Nature Medicine」','臨床・医学研究を扱う査読付き学術誌。','Nature Medicine'],
+'Nature Communications':['学術誌「Nature Communications」','自然科学全般を扱う査読付きオープンアクセス学術誌。','Nature Communications'],
+'AUC':['識別性能指標（AUC）','正例と負例をどれだけ正しく順位付けできるかを0〜1で表す指標。1に近いほど良い。','area under the ROC curve'],
+'SQL':['データベース操作言語（SQL）','関係データベースへ検索・更新などを指示する言語。','Structured Query Language'],
+'API':['外部機能呼び出し口（API）','ソフトウェア同士が機能やデータを呼び出すための規約・窓口。','Application Programming Interface'],
+'Google':['Google社','検索・クラウド・AIなどを提供する技術企業。','Google'],
+'LLaDA-Image':['画像生成・編集モデル「LLaDA-Image」','inclusionAIが公開した60億規模の画像生成・参照画像編集モデル。','LLaDA-Image'],
+'Turbo':['高速版「Turbo」','少ない生成ステップで動くよう蒸留したLLaDA-Imageの高速版。','Turbo'],
+'BF16':['16ビット浮動小数点形式（BF16）','AI計算で精度とメモリ量の折衷に使う16ビット数値形式。','bfloat16'],
+'FP8':['8ビット浮動小数点形式（FP8）','モデルのメモリ使用量や計算量を減らす8ビット数値形式。','FP8'],
+'Diffusers':['画像生成実装ライブラリ「Diffusers」','Hugging Faceが提供する拡散モデル向けPythonライブラリ。','Diffusers'],
+'Science Advances':['学術誌「Science Advances」','Science系列の査読付きオープンアクセス学術誌。','Science Advances'],
+'Nature':['学術誌「Nature」','自然科学全般を扱う国際的な査読付き学術誌。','Nature'],
+'EdU':['細胞追跡標識（EdU）','DNA合成中の細胞へ取り込ませ、後の発生段階まで細胞の残存を追う分子標識。','5-ethynyl-2-deoxyuridine'],
+'Big Five':['性格5因子（Big Five）','外向性・協調性・誠実性・神経症傾向・経験への開放性の5軸で性格を記述する枠組み。','Big Five personality traits'],
+'GWAS':['ゲノム全体関連解析（GWAS）','ゲノム全体の多数の変異と特徴の統計的関連を調べる方法。','genome-wide association study'],
+'SNP':['一塩基変異（SNP）','DNA配列の1文字だけが人によって異なる一般的な遺伝変異。','single-nucleotide polymorphism'],
+'Sst-Chodl':['Sst-Chodl抑制性ニューロン','ソマトスタチンとchondrolectinを共発現する、長距離投射を持つ少数の抑制性ニューロン。','Sst-Chodl neurons'],
+'Codex':['OpenAIのコーディングAI「Codex」','コード編集、コマンド実行、開発作業などを行うOpenAIのエージェント製品。','Codex'],
+'OpenAI':['AI研究・製品企業「OpenAI」','ChatGPTやCodexなどを開発するAI企業。','OpenAI'],
+'HTTP':['Web通信規約（HTTP）','Webブラウザや外部機能呼び出しがサーバーとデータをやり取りする通信規約。','Hypertext Transfer Protocol']};
+const keys=Object.keys(G).sort((a,b)=>b.length-a.length);
+function termify(root){if(!root)return;for(const n of [...(()=>{const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const a=[];while(w.nextNode())a.push(w.currentNode);return a})()]){const p=n.parentElement;if(!p||p.closest('.term,a,script,style,code,pre,button,.article-kicker,.nav-left'))continue;let text=n.nodeValue;let pos=0,changed=false;const frag=document.createDocumentFragment();while(pos<text.length){let best=null;for(const k of keys){const i=text.indexOf(k,pos);if(i<0)continue;if(!best||i<best.i||(i===best.i&&k.length>best.k.length))best={k,i};}if(!best)break;if(best.i>pos)frag.append(document.createTextNode(text.slice(pos,best.i)));const [label,desc,orig]=G[best.k],sp=document.createElement('span');sp.className='term';sp.textContent=label;sp.dataset.term=`${label}|${desc}|${orig}`;frag.append(sp);pos=best.i+best.k.length;changed=true;}if(changed){if(pos<text.length)frag.append(document.createTextNode(text.slice(pos)));n.replaceWith(frag);}}}
+Object.keys(storyText).forEach(id=>termify(document.getElementById(id)));
+[...document.querySelectorAll('.feed .story .rank')].forEach((r,i)=>r.textContent=String(i+1).padStart(2,'0'));
+})();
+</script>
