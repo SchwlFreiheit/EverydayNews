@@ -34,81 +34,8 @@ function decorateGenres(){
  document.querySelectorAll('.candidate .cmeta').forEach(el=>{if(el.dataset.iconized==='1')return;const raw=el.textContent.trim();const bits=raw.split('·');const genre=bits.shift().trim();const rest=bits.join('·').trim();el.innerHTML=`<span class="genre-icon" title="${genre.replace(/"/g,'&quot;')}" aria-label="${genre.replace(/"/g,'&quot;')}">${ICONS[kind(genre)]}</span>${rest?`<span class="genre-rest">${rest}</span>`:''}`;el.dataset.iconized='1'});
  const head=document.querySelector('.cand-head');if(head){const h=head.querySelector('h3');const s=head.querySelector('span');if(h)h.textContent='記事化待ち';if(s)s.textContent='検証できたものは全て本記事へ昇格';}
 }
-const scoreFix={
- funes:[82,68,73,96],voice:[73,70,82,68],ruby:[87,79,90,61],space:[66,92,84,47],agentzero:[81,63,86,95],wild:[68,94,88,42],'bci-multi':[78,96,91,56],solpi:[91,74,94,99],'reaction-hyperspace':[72,97,96,45]
-};
+const scoreFix={funes:[82,68,73,96],voice:[73,70,82,68],ruby:[87,79,90,61],space:[66,92,84,47],agentzero:[81,63,86,95],wild:[68,94,88,42],'bci-multi':[78,96,91,56],solpi:[91,74,94,99],'reaction-hyperspace':[72,97,96,45]};
 for(const [id,v] of Object.entries(scoreFix)){document.querySelectorAll(`[data-open="${id}"] .rings,#${id} .article-aside .rings`).forEach(r=>{r.dataset.scores=v.join(',');r.innerHTML=''})}
-
-const lexicon=[
- ['Evidence-Preserving Reducer','証拠を残したまま長いログを要約する機構（Evidence-Preserving Reducer）','長いログを小さなモデルで要約しても、採用した引用が保存済み原文と一致することを検証する仕組み。'],
- ['Online Context Compact','会話履歴を早めに圧縮する機構（Online Context Compact）','文脈上限まで待たず、サブタスク完了時などに履歴を圧縮して将来の入力量を減らす仕組み。'],
- ['cross-modality rest training','別種類の行動を「何もしていない例」として学習する方法（cross-modality rest training）','発話用判定器にはジェスチャーのみの時間を無動作例として与えるなど、並列動作時の誤検出を減らす訓練方法。'],
- ['VibeVoice-ASR-Streaming','発言者付き音声認識モデル「VibeVoice-ASR-Streaming」','Microsoftの研究チームが公開した、発言内容と話者ラベルを逐次出力する音声認識モデル。'],
- ['Entity–Event Graph','人物・出来事の関係グラフ（Entity–Event Graph）','人物、組織、案件と出来事を結び、関係を複数段たどれる記憶表現。'],
- ['Nature Neuroscience','神経科学誌「Nature Neuroscience」','査読付きの神経科学専門誌。'],
- ['Nature Astronomy','天文学誌「Nature Astronomy」','査読付きの天文学専門誌。'],
- ['Nature Synthesis','化学合成誌「Nature Synthesis」','査読付きの化学合成専門誌。'],
- ['Microsoft Research','Microsoftの研究部門「Microsoft Research」','Microsoft社内の研究組織。'],
- ['Agent Zero Memory','長期記憶研究「Agent Zero Memory」','AIの長期記憶を複数種類に分け、証拠へ戻れるようにする研究提案。'],
- ['ObservationPack','大きな観測結果を参照化する機構（ObservationPack）','巨大なツール出力を毎回そのまま送らず、保存先と短い抜粋を残す仕組み。'],
- ['Action Fusion','編集と検証をまとめる機構（Action Fusion）','編集後に必ず行うテストなどを同じツール呼び出しへまとめ、不要な往復を減らす仕組み。'],
- ['Claude Code','AnthropicのコーディングAI「Claude Code」','Anthropicが提供するコーディングエージェント。'],
- ['Hugging Face','AIモデル共有基盤「Hugging Face」','AIモデル、データセット、アプリを共有するサービス。'],
- ['GitHub Actions','GitHubの自動実行機能「GitHub Actions」','コード更新をきっかけにテストやデプロイを自動実行する仕組み。'],
- ['Citation lock','根拠を実際に開いた記憶へ限定する仕組み（Citation lock）','回答で引用できる証拠を、その検索中に実際に確認した記憶だけへ制限する方法。'],
- ['working memory','作業中だけ使う一時記憶（working memory）','現在の作業中に保持し、長期保存とは分けて扱う短期的な記憶。'],
- ['context window','AIが一度に参照できる文脈量（context window）','モデルが一度の処理で読むことのできる入力と出力の総量。'],
- ['cross-encoder','質問と候補を一緒に読んで関連度を再判定するモデル（cross-encoder）','検索候補を精密に並べ直すためのモデル。'],
- ['false negative','本当は該当するのに見逃す誤り（false negative）','正しい対象を誤って非該当と判定する失敗。'],
- ['False Negative','本当は該当するのに見逃す誤り（false negative）','正しい対象を誤って非該当と判定する失敗。'],
- ['HPLC-NMR','液体分離と核磁気共鳴を組み合わせた分析（HPLC-NMR）','混合物を分離しながら、各成分の構造を核磁気共鳴で調べる分析法。'],
- ['UV–Vis','紫外可視吸収分光法（UV–Vis）','紫外線から可視光までの吸収を測り、混合物の成分量を推定する方法。'],
- ['UV-Vis','紫外可視吸収分光法（UV–Vis）','紫外線から可視光までの吸収を測り、混合物の成分量を推定する方法。'],
- ['Memory Events','出来事の時系列記憶（Memory Events）','何がいつ起き、後でどう変わったかを残す記憶表現。'],
- ['faster-whisper','高速音声認識実装「faster-whisper」','Whisper系音声認識を高速実行するための実装。'],
- ['VOICEVOX','音声合成ソフト「VOICEVOX」','日本語音声を合成するソフトウェア。'],
- ['RubyGems','Ruby向けライブラリ配布サービス「RubyGems」','Ruby言語のライブラリを公開・取得する公式サービス。'],
- ['OpenAI','AI企業「OpenAI」','ChatGPTやCodexを開発するAI企業。'],
- ['Codex','OpenAIのコーディングAI「Codex」','コード編集、コマンド実行、調査などを行うAIエージェント。'],
- ['SoL-Pi','長時間AIエージェント効率化研究「SoL-Pi」','NVIDIA研究チームによる、長時間エージェントの無駄な往復や文脈量を減らす研究と公開実装。'],
- ['NVlabs','NVIDIAの研究部門「NVlabs」','NVIDIAの研究成果や実装を公開する組織。'],
- ['NVIDIA','半導体企業「NVIDIA」','GPUなどを開発する半導体企業。'],
- ['Robowski','実験自動化ロボット「Robowski」','多数の化学条件を自動で作り分けるために使われた研究用ロボット。'],
- ['Biginelli','ビギネリ反応（Biginelli）','アルデヒド、β-ケトエステル、尿素から複素環化合物を作る古典的な多成分反応。'],
- ['provenance','情報の出典・由来（provenance）','その情報がどの会話、文書、ツール出力から来たかを追跡する情報。'],
- ['held-out','開発中に見せていない検証用データ（held-out）','調整に使わず、最後の性能確認だけに使うデータ。'],
- ['vector search','意味の近さで探す検索（vector search）','文章を数値表現へ変換し、意味の近さで候補を探す検索方式。'],
- ['tool call','ツール呼び出し（tool call）','AIが検索、ファイル操作、コマンド実行など外部機能を利用する一回の操作。'],
- ['benchmark','性能比較試験（benchmark）','同じ条件で複数方式の性能を比較する試験。'],
- ['dataset','データ集合（dataset）','学習や評価に使うデータのまとまり。'],
- ['pipeline','処理手順（pipeline）','入力から出力まで複数工程を順番に接続した処理の流れ。'],
- ['GitHub','コード共有サービス「GitHub」','コード、Issue、Pull Requestなどを管理・共有する開発サービス。'],
- ['arXiv','査読前論文の公開サイト「arXiv」','研究者が査読前の論文を公開できるプレプリントサーバー。'],
- ['Figure','論文図（Figure）','論文中で実験結果や装置構成などを示す図。'],
- ['ECoG','脳表面の電気活動を測る方法（ECoG）','脳の表面に置いた電極で神経活動を測る侵襲型の記録方法。'],
- ['BCI','脳信号で機器を操作する技術（BCI）','脳活動を読み取り、文字入力や機器操作へ変換する技術。'],
- ['MCP','AIが外部ツールへ接続する共通規格（MCP）','AIから外部データやツールへ接続するための共通プロトコル。'],
- ['LLM','大規模言語モデル（LLM）','大量の文章データで学習した言語モデル。'],
- ['GPU','画像処理向け計算装置（GPU）','AI計算にも広く使われる並列計算向けプロセッサ。'],
- ['VRAM','GPU専用メモリ（VRAM）','GPUがモデルや計算途中のデータを保持するメモリ。'],
- ['API','プログラム同士の接続窓口（API）','ソフトウェア同士が機能やデータを呼び出すための接続仕様。'],
- ['OSS','ソースコード公開型ソフトウェア（OSS）','ソースコードを公開して利用・改変できるソフトウェア。'],
- ['CLI','コマンド操作ツール（CLI）','文字コマンドで操作するインターフェース。'],
- ['JSONL','1行ごとにJSONを並べる記録形式（JSONL）','大量のイベント記録などに使われるテキスト形式。'],
- ['Python','プログラミング言語「Python」','AIやデータ処理で広く使われるプログラミング言語。'],
- ['IMU','慣性計測装置（IMU）','加速度や角速度を測って体や機器の動きを記録するセンサー。'],
- ['BLE','省電力Bluetooth通信（BLE）','低消費電力で近距離通信を行うBluetooth規格。'],
- ['MECH','反応機構を推定するAI「MECH」','候補となる反応経路を生成・評価する研究用AI。'],
- ['AUC','正誤を見分ける性能指標（AUC）','判定しきい値を変えたときの識別性能を一つの数値にまとめた指標。'],
- ['ROC','判定しきい値ごとの感度と誤検出の関係（ROC）','二値分類器の性能をしきい値全体で見るための曲線。'],
- ['AI','人工知能（AI）','人間の知的作業の一部を計算機で行う技術の総称。']
-].map(([term,label,desc])=>({term,label,desc,original:term})).sort((a,b)=>b.term.length-a.term.length);
-function boundaryOK(text,i,len){const prev=text[i-1]||'',next=text[i+len]||'';const ascii=/[A-Za-z0-9_.-]/;return !ascii.test(prev)&&!ascii.test(next)}
-function spanFor(e){const s=document.createElement('span');s.className='term auto-term';s.textContent=e.label;s.dataset.term=`${e.label}|${e.desc}|${e.original}`;return s}
-function processTextNode(node){const text=node.nodeValue;if(!text||!/\p{Script=Latin}/u.test(text))return;let best=null;for(const e of lexicon){const i=text.indexOf(e.term);if(i<0||!boundaryOK(text,i,e.term.length))continue;if(!best||i<best.i||(i===best.i&&e.term.length>best.e.term.length))best={i,e}}if(!best)return;const frag=document.createDocumentFragment();if(best.i)frag.append(document.createTextNode(text.slice(0,best.i)));frag.append(spanFor(best.e));const rest=text.slice(best.i+best.e.term.length);if(rest)frag.append(document.createTextNode(rest));node.replaceWith(frag);if(rest){const tail=frag.lastChild;/* replaced fragment is emptied; find via parent next sibling below */}}
-function localize(root){if(!root)return;let changed=true,guard=0;while(changed&&guard++<2200){changed=false;const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){const p=n.parentElement;if(!p)return NodeFilter.FILTER_REJECT;if(p.closest('.term,script,style,svg,a,code,pre,button,.meta,.article-kicker,.source-list'))return NodeFilter.FILTER_REJECT;return /\p{Script=Latin}/u.test(n.nodeValue||'')?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);for(const n of nodes){const before=n.nodeValue;let hit=false;for(const e of lexicon){const i=before.indexOf(e.term);if(i>=0&&boundaryOK(before,i,e.term.length)){const frag=document.createDocumentFragment();if(i)frag.append(document.createTextNode(before.slice(0,i)));frag.append(spanFor(e));if(i+e.term.length<before.length)frag.append(document.createTextNode(before.slice(i+e.term.length)));n.replaceWith(frag);hit=true;changed=true;break}}if(hit)break}}
- root.querySelectorAll('.term:not(.auto-term)').forEach(t=>{const raw=t.textContent.trim();const e=lexicon.find(x=>x.term===raw);if(e){t.textContent=e.label;t.dataset.term=`${e.label}|${e.desc}|${e.original}`}})
-}
-decorateGenres();document.querySelectorAll('.overlay').forEach(localize);
+decorateGenres();
 })();
 </script>
